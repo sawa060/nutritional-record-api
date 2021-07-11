@@ -11,3 +11,5 @@ COPY Gemfile.lock $APP_HOME/Gemfile.lock
 RUN bundle install --jobs=4
 
 ADD . $APP_HOME
+
+EXPOSE 3001
