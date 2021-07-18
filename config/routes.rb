@@ -8,6 +8,11 @@ Rails.application.routes.draw do
       namespace :auth do
         resources :sessions, only: %i[index]
       end
+
+      # namespace :records
+      # namespace :behaviors
+      # namespace :results
+      namespace :patients
     end
   end
 end
