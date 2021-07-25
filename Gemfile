@@ -13,7 +13,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'image_processing', '~> 1.2'
 
 gem 'bootsnap', '>= 1.4.4', require: false
-gem 'devise'
+gem 'devise', '4.7.3'
 gem 'devise_token_auth'
 gem 'rack-cors'
 
