@@ -7,7 +7,8 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :validatable
   include DeviseTokenAuth::Concerns::User
 
-  has_many :records
+  has_many :records, dependent: :destroy
+  has_many :patients, through: :records
 
   validates :name, presence: true
 end

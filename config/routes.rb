@@ -11,7 +11,7 @@ Rails.application.routes.draw do
         resources :sessions, only: %i[index]
       end
 
-      # namespace :records
+      resources :records
       # namespace :behaviors
       # namespace :results
       # namespace :patients
