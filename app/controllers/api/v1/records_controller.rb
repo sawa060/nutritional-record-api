@@ -1,4 +1,6 @@
 class Api::V1::RecordsController < ApplicationController
+  before_action :set_record, only: %i[show update destroy]
+
   def index
     records = Record.order(updated_at: :desc)
     @total, @records = pager(records)
@@ -19,5 +21,11 @@ class Api::V1::RecordsController < ApplicationController
 
   def destroy
 
+  end
+
+  private
+
+  def set_record
+    @record = Record.find(params[:id])
   end
 end
