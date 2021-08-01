@@ -12,9 +12,9 @@ Rails.application.routes.draw do
       end
 
       resources :records
-      # namespace :behaviors
-      # namespace :results
-      # namespace :patients
+      resources :behaviors
+      resources :results
+      resources :patients
     end
   end
 end
