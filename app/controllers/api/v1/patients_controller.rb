@@ -1,41 +1,57 @@
-module Api
-  module V1
-    class PatientsController < ApplicationController
-      def index
-        patients = Patient.order(created_at: :desc)
+class Api::V1::PatientsController < ApplicationController
+  before_action :set_patients, only: %i[show update destroy]
 
-        render json: {
-          status: 200,
-          message: 'OK',
-          index: patients.as_json
-        }
-      end
+  def index
+    patients = Patient.order(created_at: :desc)
+    @total, @patients = pager(patient)
+    render 'index', formats: :json, handlers: 'jbuilder'
+  end
 
-      def show
-        patients = Patients.find(params[:id])
+  def show
+    render 'show', formats: :json, handlers: 'jbuilder'
+  end
 
-        render json: {
-          status: 200,
-          message: 'OK',
-          index: patients.as_json
-        }
-      end
+  def create
+    @patient = Patient.new(patient_create_params)
 
-      def create
-
-      end
-
-      def update
-
-      end
-
-      def destroy
-
-      end
-
-      def set_patients
-        @patient =
-      end
+    if @patient.save
+      render 'show', formats: :json, handlers: 'jbuilder', status: :created
+    else
+      response422_with_error(@patient.error.details)
     end
+  end
+
+  def update
+    if @patient.update(patient_update_params)
+      render 'show', formats: :json, handlers: 'jbuilder'
+    else
+      response422_with_error(@patient.errors.details)
+    end
+  end
+
+  def destroy
+    if @patient.destroy
+      response200
+    else
+      response422_with_error(@patient.errors.details)
+    end
+  end
+
+  private
+
+  def set_patients
+    @patient = Patient.find(params[:id])
+  end
+
+  def patient_create_params
+    params.require(:patient).permit(
+      :name, :sex, :email, :phone_number, :number
+    )
+  end
+
+  def patient_update_params
+    params.require(:patient).permit(
+      :name, :sex, :email, :phone_number, :number
+    )
   end
 end
