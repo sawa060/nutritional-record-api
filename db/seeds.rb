@@ -2,11 +2,10 @@ if Rails.env.development?
   # ユーザー
   user_params = {
     name: "テストユーザー",
-    email: "test@test.jp"
+    email: "test@test.jp",
     password: "Test1234"
   }
-  user = user.build(user_params)
-  user.save!
+  user = User.create!(user_params)
 
   # 患者
   PATIENT_NUMBER = 3
@@ -34,7 +33,7 @@ if Rails.env.development?
 
   # 指導記録（records）
   Record.create!(
-    use_id: User.first.id,
+    user_id: User.first.id,
     patient_id: Patient.first.id,
     subjective: "主訴（S）テスト",
     objective: "Oテスト",
