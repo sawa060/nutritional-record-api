@@ -45,13 +45,13 @@ class Api::V1::PatientsController < ApplicationController
 
   def patient_create_params
     params.require(:patient).permit(
-      :name, :sex, :email, :phone_number, :number
+      :name, :sex, :email, :phone_number, :number, :birthday
     )
   end
 
   def patient_update_params
     params.require(:patient).permit(
-      :name, :sex, :email, :phone_number, :number
+      :name, :sex, :email, :phone_number, :number, :birthday
     )
   end
 end
