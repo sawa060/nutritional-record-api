@@ -1,9 +1,10 @@
 class Api::V1::PatientsController < ApplicationController
+  before_action :authenticate_api_v1_user!
   before_action :set_patients, only: %i[show update destroy]
 
   def index
     patients = Patient.order(created_at: :desc)
-    @total, @patients = pager(patient)
+    @total, @patients = pager(patients)
     render 'index', formats: :json, handlers: 'jbuilder'
   end
 
